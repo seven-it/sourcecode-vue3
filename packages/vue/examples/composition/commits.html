@@ -2,27 +2,10 @@
 
 <div id="demo">
   <h1>Latest Vue.js Commits</h1>
-  <template v-for="branch in branches">
-    <input type="radio"
-      :id="branch"
-      :value="branch"
-      name="branch"
-      v-model="currentBranch">
-    <label :for="branch">{{ branch }}</label>
-  </template>
-  <p>vuejs/vue@{{ currentBranch }}</p>
-  <ul>
-    <li v-for="{ html_url, sha, author, commit } in commits">
-      <a :href="html_url" target="_blank" class="commit">{{ sha.slice(0, 7) }}</a>
-      - <span class="message">{{ truncate(commit.message) }}</span><br>
-      by <span class="author"><a :href="author.html_url" target="_blank">{{ commit.author.name }}</a></span>
-      at <span class="date">{{ formatDate(commit.author.date) }}</span>
-    </li>
-  </ul>
 </div>
 
 <script>
-const { createApp, ref, watchEffect } = Vue
+const { createApp, ref, watchEffect,h,defineComponent,reactive  } = Vue
 const API_URL = `https://api.github.com/repos/vuejs/vue-next/commits?per_page=3&sha=`
 
 const truncate = v => {
@@ -32,29 +15,90 @@ const truncate = v => {
 
 const formatDate = v => v.replace(/T|Z/g, ' ')
 
-createApp({
-  setup() {
-    const currentBranch = ref('master')
-    const commits = ref(null)
 
-    watchEffect(() => {
-      fetch(`${API_URL}${currentBranch.value}`)
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          commits.value = data
-        })
-    })
+const app = createApp({});
+// setup(props) {
+//     debugger
+//     const obj = reactive({ count: 0 });
+//     obj.count = 1;
+//     return {}
+//   }
 
-    return {
-      branches: ['master', 'sync'],
-      currentBranch,
-      commits,
-      truncate,
-      formatDate
-    }
-  }
-}).mount('#demo')
+// app.mixin({
+//   hello: 'goodbye!',
+//   created() {
+//     console.log(this.$options.hello) // => "hello!"
+//   }
+// })
+
+// app.config.optionMergeStrategies.hello = (parent, child) => {
+//   console.log(child);
+//   return `Hello, bbbbb ${child}`
+// }
+// app.config.performance = true
+// app.config.compilerOptions.isCustomElement = tag => tag.startsWith('ion-')
+
+// const MyComponent = defineComponent({
+//   data() {
+//     return {
+//       hello: "Vue!"
+//     }
+//   },
+//   render() {
+//     return h('h1',{childValue: 'component-child!'},[
+//     `Hello ${this.hello} Vue3`,
+//     h('h2', `hello child ${this.hello}`)
+//     ])
+//   },
+// })
+
+// ----------------------------------------------------------------- start
+// 创建全局组件
+// app.component('component-a',{
+//   data() {
+//     return {
+//       hello: "Vue!"
+//     }
+//   },
+//   render() {
+//     return h('h1',{childValue: 'component-child!'},[
+//     `Hello ${this.hello} Vue3`,
+//     h('h2', `hello child ${this.hello}`)
+//     ])
+//   },
+//   created() {
+//     console.log(this.$options.hello)
+//   }
+// })
+// ----------------------------------------------------------------- end
+debugger
+app.mount("#demo");
+
+
+
+// createApp({
+//   setup() {
+//     const currentBranch = ref('master')
+//     const commits = ref(null)
+
+//     watchEffect(() => {
+//       fetch(`${API_URL}${currentBranch.value}`)
+//         .then(res => res.json())
+//         .then(data => {
+//           console.log(data)
+//           commits.value = data
+//         })
+//     })
+
+//     return {
+//       branches: ['master', 'sync'],
+//       currentBranch,
+//       commits,
+//       truncate,
+//       formatDate
+//     }
+//   }
+// }).mount('#demo')
 </script>
 
 <style>

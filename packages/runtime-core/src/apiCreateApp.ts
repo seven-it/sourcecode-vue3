@@ -184,7 +184,7 @@ export function createAppAPI<HostElement>(
       rootProps = null
     }
 
-    const context = createAppContext()
+    const context = createAppContext()  // 返回一个对象作为上下文环境
     const installedPlugins = new Set()
 
     let isMounted = false
@@ -245,17 +245,23 @@ export function createAppAPI<HostElement>(
         return app
       },
 
+      /**
+       * 通过该方法来注册一个全局组件，
+       * @param name 组件名
+       * @param component 选项对象
+       * @returns Vue 实例
+       */
       component(name: string, component?: Component): any {
         if (__DEV__) {
-          validateComponentName(name, context.config)
+          validateComponentName(name, context.config)  // 验证注册的全局组件名称是否合法，不可以是 vue 内置标签或 html 原生标签
         }
-        if (!component) {
+        if (!component) {   
           return context.components[name]
         }
         if (__DEV__ && context.components[name]) {
           warn(`Component "${name}" has already been registered in target app.`)
         }
-        context.components[name] = component
+        context.components[name] = component  // 将该组件添加到全局环境下
         return app
       },
 

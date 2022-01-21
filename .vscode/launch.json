@@ -23,6 +23,13 @@
       "windows": {
         "program": "${workspaceFolder}/node_modules/jest/bin/jest",
       }
-    }
+    },
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/packages/vue/examples/composition/commits.html"
+    },
   ]
 }

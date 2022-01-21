@@ -64,7 +64,7 @@ export const hydrate = ((...args) => {
 }) as RootHydrateFunction
 
 export const createApp = ((...args) => {
-  const app = ensureRenderer().createApp(...args)
+  const app = ensureRenderer().createApp(...args) // 首先确认平台渲染器，再调用createApp创建app
 
   if (__DEV__) {
     injectNativeTagCheck(app)
@@ -100,7 +100,7 @@ export const createApp = ((...args) => {
 
     // clear content before mounting
     container.innerHTML = ''
-    const proxy = mount(container, false, container instanceof SVGElement)
+    const proxy = mount(container, false, container instanceof SVGElement) // 正式开始挂载节点
     if (container instanceof Element) {
       container.removeAttribute('v-cloak')
       container.setAttribute('data-v-app', '')

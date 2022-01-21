@@ -325,7 +325,7 @@ function baseCreateRenderer(
     initFeatureFlags()
   }
 
-  const target = getGlobalThis()
+  const target = getGlobalThis() 
   target.__VUE__ = true
   if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
     setDevtoolsHook(target.__VUE_DEVTOOLS_GLOBAL_HOOK__, target)
@@ -345,7 +345,7 @@ function baseCreateRenderer(
     setScopeId: hostSetScopeId = NOOP,
     cloneNode: hostCloneNode,
     insertStaticContent: hostInsertStaticContent
-  } = options
+  } = options  // 获取到dom 节点操作
 
   // Note: functions inside this closure should use `const xxx = () => {}`
   // style in order to prevent being inlined by minifiers.
