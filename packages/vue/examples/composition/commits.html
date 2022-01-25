@@ -1,8 +1,6 @@
 <script src="../../dist/vue.global.js"></script>
 
-<div id="demo">
-  <h1>Latest Vue.js Commits</h1>
-</div>
+<div id="demo"></div>
 
 <script>
 const { createApp, ref, watchEffect,h,defineComponent,reactive  } = Vue
@@ -15,7 +13,7 @@ const truncate = v => {
 
 const formatDate = v => v.replace(/T|Z/g, ' ')
 
-
+// <h1>Latest Vue.js Commits</h1>
 const app = createApp({});
 // setup(props) {
 //     debugger

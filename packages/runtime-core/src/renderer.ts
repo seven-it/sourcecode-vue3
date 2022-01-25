@@ -360,12 +360,12 @@ function baseCreateRenderer(
     slotScopeIds = null,
     optimized = __DEV__ && isHmrUpdating ? false : !!n2.dynamicChildren
   ) => {
-    if (n1 === n2) {
+    if (n1 === n2) { // 新旧节点相同，什么都不做
       return
     }
 
     // patching & not same type, unmount old tree
-    if (n1 && !isSameVNodeType(n1, n2)) {
+    if (n1 && !isSameVNodeType(n1, n2)) {  // 新旧节点的类型不同那么删除旧节点
       anchor = getNextHostNode(n1)
       unmount(n1, parentComponent, parentSuspense, true)
       n1 = null
@@ -376,8 +376,8 @@ function baseCreateRenderer(
       n2.dynamicChildren = null
     }
 
-    const { type, ref, shapeFlag } = n2
-    switch (type) {
+    const { type, ref, shapeFlag } = n2 
+    switch (type) { // 根据节点类型调用不同的处理函数
       case Text:
         processText(n1, n2, container, anchor)
         break
@@ -417,7 +417,7 @@ function baseCreateRenderer(
             slotScopeIds,
             optimized
           )
-        } else if (shapeFlag & ShapeFlags.COMPONENT) {
+        } else if (shapeFlag & ShapeFlags.COMPONENT) {  // 对vue组件节点的处理函数
           processComponent(
             n1,
             n2,
@@ -1154,7 +1154,7 @@ function baseCreateRenderer(
     optimized: boolean
   ) => {
     n2.slotScopeIds = slotScopeIds
-    if (n1 == null) {
+    if (n1 == null) { // 如果旧节点不存在，那么直接将新节点挂载。
       if (n2.shapeFlag & ShapeFlags.COMPONENT_KEPT_ALIVE) {
         ;(parentComponent!.ctx as KeepAliveContext).activate(
           n2,
@@ -1219,7 +1219,7 @@ function baseCreateRenderer(
       if (__DEV__) {
         startMeasure(instance, `init`)
       }
-      setupComponent(instance)
+      setupComponent(instance) // 创建设置组件
       if (__DEV__) {
         endMeasure(instance, `init`)
       }

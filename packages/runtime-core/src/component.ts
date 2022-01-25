@@ -452,7 +452,7 @@ export function createComponentInstance(
   suspense: SuspenseBoundary | null
 ) {
   const type = vnode.type as ConcreteComponent
-  // inherit parent app context - or - if root, adopt from root vnode
+  // inherit parent app context - or - if root, adopt from root vnode 创建上下文
   const appContext =
     (parent ? parent.appContext : vnode.appContext) || emptyAppContext
 
